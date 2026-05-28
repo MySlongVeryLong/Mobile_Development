@@ -1,9 +1,13 @@
 import 'dart:math';
 
 enum Skill {
-  Flutter,
-  Dart,
-  Other;
+  Flutter(label: 'despacito'),
+  Dart(label: 'noob'),
+  Other(label: 'jeff Bezo');
+
+  final String label;
+
+  const Skill({required this.label});
 
   double salary() {
     switch (this) {
@@ -61,7 +65,7 @@ class Employee {
   }
 
   String toString() {
-    return "Employee\nSkills: $skills\nAddress: $address\nExperience: $yearOfExperience\nSalary: ${employeeSalary()}";
+    return "Employee\nSkills: ${skills.map((skill) => skill.label).join(", ")}\nAddress: $address\nExperience: $yearOfExperience\nSalary: ${employeeSalary()}";
   }
 }
 
@@ -83,4 +87,5 @@ void main() {
 
   print(employee);
   print(mobileEmployee);
+  print(Skill.Flutter.label);
 }

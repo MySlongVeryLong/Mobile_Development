@@ -30,10 +30,9 @@ class Bank {
 
   Bank({required this.name});
 
-  BankAccount createAccount(int id, String owner) { 
-
-	// dont know what tto do
-
+  BankAccount createAccount(int id, String owner) {
+    // dont know what tto do
+  }
 }
 
 void main() {
@@ -48,23 +47,14 @@ void main() {
   print(davidAccount.balance);
 
   try {
-
     davidAccount.withdraw(75);
-
-  } catch (e){
+  } catch (e) {
     print(e);
   }
 
   try {
-
-
     myBank.createAccount(100, 'David');
-
-  } catch (e){
-
-    print(e); 
-
+  } catch (e) {
+    print(e);
   }
-
-
 }
