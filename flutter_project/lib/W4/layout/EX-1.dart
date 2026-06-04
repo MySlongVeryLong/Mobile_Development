@@ -32,6 +32,7 @@ void main() {
                 ),
               ],
             ),
+            const SizedBox(height: 20.0,),
             Expanded(
               child: Container(width: double.infinity, color: Colors.pink),
             ),

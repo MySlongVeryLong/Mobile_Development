@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +14,7 @@ void main() {
         
      
         child: Container(
+          margin: EdgeInsets.all(40),
           decoration: BoxDecoration(
             color: Colors.blue[600],          
             borderRadius: BorderRadius.circular(20.0), 
