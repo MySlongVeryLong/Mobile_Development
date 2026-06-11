@@ -19,7 +19,11 @@ class _DiceRollerState extends State<DiceRoller> {
 
   void rollDice() {
     setState(() {
-      activeDiceImage = diceImage4;
+      if (activeDiceImage == diceImage2) {
+        activeDiceImage = diceImage4;
+      } else {
+        activeDiceImage = diceImage2;
+      }
     });
   }
 
