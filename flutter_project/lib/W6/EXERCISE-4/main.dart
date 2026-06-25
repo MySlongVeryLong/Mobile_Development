@@ -9,7 +9,7 @@ void main() => runApp(MaterialApp(
           backgroundColor: appColor,
           title: const Text("Favorite Jokes"),
         ),
-        body: const Column(
+        body: ListView(
           children: [FavoriteCard(), FavoriteCard(), FavoriteCard()],
         ),
       ),

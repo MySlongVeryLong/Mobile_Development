@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TemperatureScreen extends StatelessWidget {
+class TemperatureScreen extends StatelessWidget { 
   TemperatureScreen({super.key});
 
   final InputDecoration inputDecoration = InputDecoration(
