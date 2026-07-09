@@ -22,7 +22,7 @@ class ExpenseTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
-          title: Text(expense.title),
+          title: Text(expense.title, overflow: TextOverflow.ellipsis),
           subtitle: Text(dateFormat),
           leading: Icon(expense.category.icon),
           trailing: Text("${expense.amount.toString()} \$"),

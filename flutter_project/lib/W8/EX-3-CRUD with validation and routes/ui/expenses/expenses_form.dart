@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../models/expense.dart';
 
@@ -13,12 +12,20 @@ class ExpenseForm extends StatefulWidget {
 class _ExpenseFormState extends State<ExpenseForm> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  String? _errorMessage;
 
   void onCheckPressed() {
-    String title = _titleController.text;
-    double amount = double.parse(_amountController.text);
+    final title = _titleController.text.trim();
+    final amount = double.tryParse(_amountController.text.trim());
 
-    Expense newExpense = Expense(
+    if (title.isEmpty || amount == null || amount <= 0 || amount > 100) {
+      setState(() {
+        _errorMessage = 'Amount must be a number between 1 and 100.';
+      });
+      return;
+    }
+
+    final newExpense = Expense(
       amount: amount,
       title: title,
       category: Category.food,
@@ -41,40 +48,49 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(label: Text('Title')),
-          ),
-
-          SizedBox(height: 20),
-          TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-            ],
-            controller: _amountController,
-            maxLength: 50,
-            decoration: InputDecoration(
-              prefix: Text("\$"),
-              label: const Text('Amount'),
+    return Scaffold(
+      appBar: AppBar(title: const Text("New Expense")),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _titleController,
+              maxLength: 50,
+              decoration: const InputDecoration(label: Text('Title')),
             ),
-          ),
 
-          Spacer(),
+            const SizedBox(height: 20),
+            TextField(
+              keyboardType: TextInputType.number,
+              controller: _amountController,
+              maxLength: 50,
+              decoration: const InputDecoration(
+                prefix: Text("\$"),
+                label: Text('Amount'),
+              ),
+            ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(onPressed: onCancelPressed, child: Text("Cancel")),
-              ElevatedButton(onPressed: onCheckPressed, child: Text("Save")),
-            ],
-          ),
-        ],
+            if (_errorMessage != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  _errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+
+            const Spacer(),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: onCancelPressed, child: Text("Cancel")),
+                ElevatedButton(onPressed: onCheckPressed, child: Text("Save")),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
