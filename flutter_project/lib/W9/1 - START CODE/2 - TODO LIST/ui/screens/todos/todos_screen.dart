@@ -69,19 +69,19 @@ class _TodosScreenState extends State<TodosScreen> {
         
         final List<Todo>? currentList = asyncData.value;
         Todo currentTodo;
-        final List<Todo> newList = [];
+        final List<Todo> updatedList = [];
 
         for (currentTodo in currentList!) {
           if (todo.id == currentTodo.id) {
             
-            newList.add(
+            updatedList.add(
               Todo(id: todo.id, title: todo.title, completed: newStatus),
             );
           } else {
-            newList.add(currentTodo);
+            updatedList.add(currentTodo);
           }
         }
-        asyncData = AsyncData.success(newList);
+        asyncData = AsyncData.success(updatedList);
       });
     } on RepositoryException catch (e) {
       setState(() {
